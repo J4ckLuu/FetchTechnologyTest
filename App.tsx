@@ -162,7 +162,7 @@ function App(): JSX.Element {
           name="Notification"
           component={ComingSoonScreen}
           options={{
-            tabBarBadge: '',
+            tabBarBadge: '1',
           }}
         />
         <Tab.Screen name="Card" component={ComingSoonScreen} />
