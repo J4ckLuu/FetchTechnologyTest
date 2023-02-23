@@ -113,12 +113,7 @@ const HomeScreen = () => {
 const ComingSoonScreen = () => {
   return (
     <BaseContainer style={styles.screenContainer}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={styles.comingSoonContainer}>
         <Text style={fontStyle.header1}>Coming Soon</Text>
       </View>
     </BaseContainer>
@@ -176,6 +171,11 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  comingSoonContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
