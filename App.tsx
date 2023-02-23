@@ -17,7 +17,7 @@ import HeaderSection from './src/components/Home/HeaderSection';
 import ProductList from './src/components/Home/ProductList';
 import Icon from './src/components/Icon';
 import {ICONS} from './src/assets/icon';
-import {FONT} from './src/constant/fonts';
+import {fontStyle} from './src/constant/fonts';
 
 const Tab = createBottomTabNavigator();
 
@@ -119,7 +119,7 @@ const ComingSoonScreen = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={FONT.header1}>Coming Soon</Text>
+        <Text style={fontStyle.header1}>Coming Soon</Text>
       </View>
     </BaseContainer>
   );

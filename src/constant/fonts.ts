@@ -1,6 +1,7 @@
+import {StyleSheet} from 'react-native';
 import {COLORS} from './colors';
 
-export const FONT = {
+export const fontStyle = StyleSheet.create({
   header1: {
     fontSize: 48,
     color: COLORS.black,
@@ -43,4 +44,4 @@ export const FONT = {
     fontWeight: 'bold',
     lineHeight: 24,
   },
-};
+});

@@ -2,19 +2,19 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ICONS} from '../../assets/icon';
 import {COLORS} from '../../constant/colors';
-import {FONT} from '../../constant/fonts';
+import {fontStyle} from '../../constant/fonts';
 import Button from '../Button';
 import Divider from '../Container/Divider';
 import Header from '../Header';
 import Icon from '../Icon';
 import CardInfo from './CardInfo';
 
-const WelcomeText = () => {
+const WelcomeText = (): JSX.Element => {
   return (
     <>
-      <Text style={FONT.header3}>Silver Tier</Text>
+      <Text style={fontStyle.header3}>Silver Tier</Text>
       <Divider height={8} />
-      <Text style={FONT.para1}>
+      <Text style={fontStyle.para1}>
         In Silver Tier, every $1 in rental fee paid, you get 2 coins to redeem
         exclusive rewards.
       </Text>

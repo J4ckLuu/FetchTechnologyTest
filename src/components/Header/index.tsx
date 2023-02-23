@@ -1,13 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, ViewStyle} from 'react-native';
 
-const Header = ({
-  children,
-  style,
-}: {
+export type HeaderProps = {
   children: JSX.Element | JSX.Element[];
   style?: ViewStyle;
-}) => {
+};
+
+const Header = ({children, style}: HeaderProps): JSX.Element => {
   return (
     <View style={StyleSheet.flatten([styles.container, style])}>
       {children}

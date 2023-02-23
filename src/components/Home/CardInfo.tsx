@@ -3,12 +3,16 @@ import {View, Text, ImageBackground, StyleSheet, ViewStyle} from 'react-native';
 import {ICONS} from '../../assets/icon';
 import {IMAGES} from '../../assets/image';
 import {COLORS} from '../../constant/colors';
-import {FONT} from '../../constant/fonts';
+import {fontStyle} from '../../constant/fonts';
 import Button from '../Button';
 import Divider from '../Container/Divider';
 import Icon from '../Icon';
 
-const ProgressBar = ({fillPercentage}: {fillPercentage: number}) => {
+const ProgressBar = ({
+  fillPercentage,
+}: {
+  fillPercentage: number;
+}): JSX.Element => {
   const filledBarStyle = {flex: fillPercentage};
   const unfilledBarStyle = {flex: 100 - fillPercentage};
 
@@ -25,35 +29,38 @@ const ProgressBar = ({fillPercentage}: {fillPercentage: number}) => {
   );
 };
 
-const CardInfo = ({style}: {style: ViewStyle}) => {
+const CardInfo = ({style}: {style: ViewStyle}): JSX.Element => {
   return (
     <ImageBackground
       style={StyleSheet.flatten([styles.container, style])}
       source={IMAGES.cardBackground}
       resizeMode={'stretch'}>
-      <Text style={FONT.title3}>Available Coin balance</Text>
+      <Text style={fontStyle.title3}>Available Coin balance</Text>
       <Divider height={8} />
-      <Text style={FONT.header1}>340</Text>
+      <Text style={fontStyle.header1}>340</Text>
       <Divider height={32} />
       <ProgressBar fillPercentage={70} />
       <Divider height={32} />
-      <Text style={StyleSheet.flatten([FONT.para1, {color: COLORS.gray04}])}>
+      <Text
+        style={StyleSheet.flatten([fontStyle.para1, {color: COLORS.gray04}])}>
         You have paid rental fee for $1,200.{'\n'}Pay more $800 to achieve Gold
         Tier.
       </Text>
       <Divider height={16} />
-      <Button style={{flexDirection: 'row'}}>
-        <Text style={StyleSheet.flatten([FONT.para1, {color: COLORS.sub}])}>
+      <Button style={styles.viewTierButtonContainer}>
+        <Text
+          style={StyleSheet.flatten([fontStyle.para1, {color: COLORS.sub}])}>
           View tier benefits
         </Text>
         <Icon src={ICONS.right} style={styles.rightIcon} />
       </Button>
       <Divider height={24} />
       <Button style={styles.myCouponButton}>
-        <Text style={FONT.title1}>My Coupons</Text>
+        <Text style={fontStyle.title1}>My Coupons</Text>
       </Button>
       <Divider height={16} />
-      <Text style={StyleSheet.flatten([FONT.para3, {textAlign: 'center'}])}>
+      <Text
+        style={StyleSheet.flatten([fontStyle.para3, {textAlign: 'center'}])}>
         Updated : 02/11/2021
       </Text>
     </ImageBackground>
@@ -97,6 +104,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
+  viewTierButtonContainer: {flexDirection: 'row'},
 });
 
 export default CardInfo;

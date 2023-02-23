@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {ICONS} from '../../assets/icon';
 import {COLORS} from '../../constant/colors';
-import {FONT} from '../../constant/fonts';
+import {fontStyle} from '../../constant/fonts';
 import {formatNumber} from '../../utils/Numbers';
 import Button from '../Button';
 import Divider from '../Container/Divider';
@@ -23,33 +23,37 @@ export type ProductItem = {
   description: string;
 };
 
-const PriceTag = ({
-  price,
-  isSufficient = true,
-}: {
+export type PriceTagProps = {
   price: string | number;
   isSufficient: boolean;
-}) => {
+};
+
+const PriceTag = ({price, isSufficient = true}: PriceTagProps): JSX.Element => {
   if (isSufficient) {
-    return <Text style={FONT.title2}>{price} Coins</Text>;
+    return <Text style={fontStyle.title2}>{price} Coins</Text>;
   }
 
   return (
     <View style={styles.priceTagContainer}>
       <Icon src={ICONS.insufficientIcon} style={styles.insufficientIcon} />
       <Divider width={4} />
-      <Text style={StyleSheet.flatten([FONT.title2, {color: COLORS.gray03}])}>
+      <Text
+        style={StyleSheet.flatten([fontStyle.title2, {color: COLORS.gray03}])}>
         {price} Coins
       </Text>
     </View>
   );
 };
 
-const InsufficientAlertText = ({isSufficient}: {isSufficient: boolean}) =>
+const InsufficientAlertText = ({
+  isSufficient,
+}: {
+  isSufficient: boolean;
+}): JSX.Element =>
   isSufficient ? (
     <></>
   ) : (
-    <Text style={StyleSheet.flatten([FONT.para3, {color: COLORS.sub}])}>
+    <Text style={StyleSheet.flatten([fontStyle.para3, {color: COLORS.sub}])}>
       Insufficient coins
     </Text>
   );
@@ -71,11 +75,43 @@ const ProductList = ({
   title: string;
   titleStyle: TextStyle;
 }): JSX.Element => {
+  const renderProductCard = ({item}: {item: ProductItem}) => {
+    const isSufficientBalance = availableBalance >= item?.price;
+    return (
+      <View style={styles.shadow}>
+        <Button style={styles.productContainer}>
+          <Image
+            source={item?.source}
+            style={{width: '100%', height: 98}}
+            resizeMode="stretch"
+          />
+          <View style={{padding: 16}}>
+            <PriceTag
+              price={formatNumber(item?.price)}
+              isSufficient={isSufficientBalance}
+            />
+            <Divider height={8} />
+            <Text
+              style={StyleSheet.flatten([
+                fontStyle.para1,
+                {color: COLORS.gray04},
+              ])}
+              numberOfLines={isSufficientBalance ? 3 : 2}>
+              {item?.description}
+            </Text>
+            <Divider height={8} />
+            <InsufficientAlertText isSufficient={isSufficientBalance} />
+          </View>
+        </Button>
+      </View>
+    );
+  };
+
   return (
     <View style={style}>
       <Text
         style={StyleSheet.flatten([
-          FONT.title1,
+          fontStyle.title1,
           {color: COLORS.grey01},
           titleStyle,
         ])}>
@@ -88,37 +124,7 @@ const ProductList = ({
         data={data}
         showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={<Separator />}
-        renderItem={({item}: {item: ProductItem}) => {
-          const isSufficientBalance = availableBalance >= item?.price;
-          return (
-            <View style={styles.shadow}>
-              <Button style={styles.productContainer}>
-                <Image
-                  source={item?.source}
-                  style={{width: '100%', height: 98}}
-                  resizeMode="stretch"
-                />
-                <View style={{padding: 16}}>
-                  <PriceTag
-                    price={formatNumber(item?.price)}
-                    isSufficient={isSufficientBalance}
-                  />
-                  <Divider height={8} />
-                  <Text
-                    style={StyleSheet.flatten([
-                      FONT.para1,
-                      {color: COLORS.gray04},
-                    ])}
-                    numberOfLines={isSufficientBalance ? 3 : 2}>
-                    {item?.description}
-                  </Text>
-                  <Divider height={8} />
-                  <InsufficientAlertText isSufficient={isSufficientBalance} />
-                </View>
-              </Button>
-            </View>
-          );
-        }}
+        renderItem={renderProductCard}
       />
     </View>
   );
